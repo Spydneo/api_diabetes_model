@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "api-iris-model"
+name = "api_diabetes_model"
 version = "1.2"
 description = ""
 authors = ["Jairo Calderón"]
