@@ -8,8 +8,8 @@ app = FastAPI()
 ##################### Load Model #########################
 def load_model():
     os.system('ls')
-    return joblib.load("api_iris_model/model/iris_classifier.joblib")
-    # return joblib.load("model/iris_classifier.joblib") #To Dockerfile workdir
+    return joblib.load("api_diabetes_model/model/iris_classifier.joblib")
+    # return joblib.load("model/api_diabetes_model.joblib") #To Dockerfile Workdir
 
 ##################### BaseModel ###########################
 class InferenceParameters (BaseModel):
