@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "api_diabetes_model"
-version = "1.2"
+version = "1.0"
 description = ""
 authors = ["Jairo Calderón"]
 license = "MIT"
@@ -13,6 +13,7 @@ scikit-learn = "1.0.2"
 pandas = "^1.5.2"
 joblib = "^1.2.0"
 uvicorn = "^0.15.0"
+mlflow = "1.29.0"
 
 [build-system]
 requires = ["poetry-core"]
