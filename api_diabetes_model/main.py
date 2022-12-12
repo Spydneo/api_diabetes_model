@@ -28,7 +28,7 @@ app.add_middleware(
 mlflow.set_tracking_uri("http://127.0.0.1:5000")
 def load_model():
     os.system('ls')
-    return mlflow.sklearn.load_model("models:/iris/production")
+    return mlflow.sklearn.load_model("models:/diabetes/production")
 
 # def load_model():
 #     os.system('ls')
@@ -37,14 +37,14 @@ def load_model():
 
 ##################### BaseModel ###########################
 class InferenceParameters (BaseModel):
-    """Medidas de las carecteristicas de la flor separadas por coma
+    """Medidas de las carecteristicas de salud separadas por coma
 
     Args:
         medidas (string): String de medidas
     
     Ejemplo
     =======
-    6.3, 2.7, 4.9, 1.8
+    11,143,94,33,146,36.6,0.254,51
     """
     medidas: list
 
