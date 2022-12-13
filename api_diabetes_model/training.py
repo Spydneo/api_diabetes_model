@@ -5,8 +5,8 @@ from sklearn import datasets
 import mlflow
 
 # Uso de api de MLFlow con objeto cliente
-mlflow_client = mlflow.client.MlflowClient("http://127.0.0.1:5000")
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+mlflow_client = mlflow.client.MlflowClient("http://localhost:5000")
+mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("iris_experiment")
 
 

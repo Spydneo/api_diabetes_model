@@ -21,11 +21,14 @@ FROM python-base as builder-base
 RUN apt-get update && apt-get install --no-install-recommends -y curl build-essential
 
 # install poetry - respects $POETRY_VERSION & $POETRY_HOME
-RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | POETRY_PREVIEW=1 python
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
 # copy project requirement files here to ensure they will be cached.
 WORKDIR $PYSETUP_PATH
 COPY poetry.lock pyproject.toml ./
+
+# TEst fix error
+RUN curl https://bootstrap.pypa.io/ez_setup.py | python
 
 # install runtime deps - uses $POETRY_VIRTUALENVS_IN_PROJECT internally
 RUN poetry install --no-dev
@@ -34,7 +37,11 @@ RUN poetry install --no-dev
 FROM python-base as production
 COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 COPY api_diabetes_model /api_diabetes_model/
+# COPY model /model/
+RUN pwd && ls
+RUN echo $(ls)
+# RUN python -m model
 WORKDIR /api_diabetes_model
-RUN python -m training
 EXPOSE 5000
+EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"]
