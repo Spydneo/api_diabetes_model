@@ -9,8 +9,8 @@ import os
 
 def main ():
     # Uso de api de MLFlow con objeto cliente
-    mlflow_client = mlflow.client.MlflowClient("http://127.0.0.1:5000")
-    mlflow.set_tracking_uri("http://127.0.0.1:5000")
+    mlflow_client = mlflow.client.MlflowClient("http://localhost:8000")
+    mlflow.set_tracking_uri("http://localhost:8000")
     mlflow.set_experiment("diabetes_experiment")
     # Almacenamiento de parametros y modelo en MLFlow
     mlflow.sklearn.autolog()

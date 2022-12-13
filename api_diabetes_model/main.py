@@ -25,14 +25,14 @@ app.add_middleware(
 
 ##################### Load Model #########################
 # Load model production version of MLFlow server
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+mlflow.set_tracking_uri("http://localhost:8000")
 def load_model():
     os.system('ls')
     return mlflow.sklearn.load_model("models:/diabetes/production")
 
 # def load_model():
 #     os.system('ls')
-#     return joblib.load("api_diabetes_model/model/iris_classifier.joblib")
+    # return joblib.load("api_diabetes_model/model/iris_classifier.joblib")
     # return joblib.load("model/api_diabetes_model.joblib") #To Dockerfile Workdir
 
 ##################### BaseModel ###########################
