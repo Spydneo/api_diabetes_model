@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 import joblib
+import pickle
 import pandas as pd
 from pydantic import BaseModel
 import os
 from fastapi.middleware.cors import CORSMiddleware
-import mlflow
 
 app = FastAPI()
 
@@ -24,16 +24,14 @@ app.add_middleware(
 )
 
 ##################### Load Model #########################
-# Load model production version of MLFlow server
-mlflow.set_tracking_uri("http://localhost:8000")
 def load_model():
     os.system('ls')
-    return mlflow.sklearn.load_model("models:/diabetes/production")
+    with open("model/pickle/diabetes_model.pkl", "rb") as f:  #To Dockerfile Workdir
+        modelo_importado = pickle.load(f)
 
-# def load_model():
-#     os.system('ls')
-    # return joblib.load("api_diabetes_model/model/iris_classifier.joblib")
-    # return joblib.load("model/api_diabetes_model.joblib") #To Dockerfile Workdir
+    return modelo_importado
+    # return joblib.load("api_diabetes_model/model/iris_classifier.joblib") #Work in localhost
+    # return joblib.load("model/pickle/diabetes_model.pkl") #To Dockerfile Workdir
 
 ##################### BaseModel ###########################
 class InferenceParameters (BaseModel):

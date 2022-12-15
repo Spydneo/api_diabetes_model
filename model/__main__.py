@@ -5,15 +5,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import KNNImputer
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import RandomizedSearchCV
+import pickle
 import os
 
 def main ():
-    # Uso de api de MLFlow con objeto cliente
-    mlflow_client = mlflow.client.MlflowClient("http://localhost:8000")
-    mlflow.set_tracking_uri("http://localhost:8000")
-    mlflow.set_experiment("diabetes_experiment")
-    # Almacenamiento de parametros y modelo en MLFlow
-    mlflow.sklearn.autolog()
 
     # Obtención del Dataset
     os.system('ls')
@@ -57,7 +52,8 @@ def main ():
 
     pipeline.fit(X, y)
 
-    mlflow.sklearn.log_model(pipeline, "model", registered_model_name='diabetes')
+    with open('model/pickle/diabetes_model.pkl', 'wb') as f:
+        pickle.dump(pipeline.best_estimator_, f)
 
 if __name__ == '__main__':
     main()

@@ -28,7 +28,7 @@ WORKDIR $PYSETUP_PATH
 COPY poetry.lock pyproject.toml ./
 
 # TEst fix error
-RUN curl https://bootstrap.pypa.io/ez_setup.py | python
+# RUN curl https://bootstrap.pypa.io/ez_setup.py | python
 
 # install runtime deps - uses $POETRY_VIRTUALENVS_IN_PROJECT internally
 RUN poetry install --no-dev
@@ -37,7 +37,7 @@ RUN poetry install --no-dev
 FROM python-base as production
 COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 COPY api_diabetes_model /api_diabetes_model/
-# COPY model /model/
+COPY model /model/
 RUN pwd && ls
 RUN echo $(ls)
 # RUN python -m model
