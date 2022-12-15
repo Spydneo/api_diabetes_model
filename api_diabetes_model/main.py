@@ -26,7 +26,7 @@ app.add_middleware(
 ##################### Load Model #########################
 def load_model():
     os.system('ls')
-    with open("model/pickle/diabetes_model.pkl", "rb") as f:  #To Dockerfile Workdir
+    with open("../model/pickle/diabetes_model.pkl", "rb") as f:  #To Dockerfile Workdir
         modelo_importado = pickle.load(f)
 
     return modelo_importado
