@@ -14,7 +14,7 @@ uvicorn api_diabetes_model.main:app --port 5000 --reload
 
 Para arrancar el servicio de MlFlow:
 ```bash
-mlflow ui --port 5000 --serve-artifacts --backend-store-uri sqlite:///mlflowdb.sqlite
+mlflow ui --port 8000 --serve-artifacts --backend-store-uri sqlite:///mlflowdb.sqlite
 ```
 
 Para crear la imagen de Docker:
@@ -22,6 +22,6 @@ Para crear la imagen de Docker:
 docker build -t diabetes_api .
 ```
 
-Se puede comentar el apartado de MLFlow y descomentar la carga del modelo en local (pickle) si no se quiere utilizar mlflow.
+Se puede comentar el apartado de MLFlow y descomentar la carga del modelo en local (pickle) si no se quiere utilizar mlflow o en caso de tener errores a la hora de crear la imagen de Docker.
 
 Autor: Jairo Calderón
