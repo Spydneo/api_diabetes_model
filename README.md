@@ -7,7 +7,6 @@ Para entrenar el modelo podemos ejecutar:
  python -m modelo
 ```
 
-
 Para arrancar el servicio de Fast API:
 ```bash
 uvicorn api_diabetes_model.main:app --port 5000 --reload
@@ -26,4 +25,3 @@ docker build -t diabetes_api .
 Se puede comentar el apartado de MLFlow y descomentar la carga del modelo en local (pickle) si no se quiere utilizar mlflow.
 
 Autor: Jairo Calderón
-======================
