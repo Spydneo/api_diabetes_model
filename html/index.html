@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>API Inference</title>
+    <link rel="stylesheet" href="main.css">
+    <!-- GOOGLE FONTs -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- ANIMATE CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+</head>
+
+<body>
+    <div class="content">
+
+        <h1 class="logo">API<span>nference</span></h1>
+
+        <div class="model-wrapper animated bounceInUp">
+            <div class="model-form">
+                <h3>Inputs</h3>
+                <form id="my-form">
+                    <p>
+                        <label>Pregnancies</label>
+                        <input id="pregnancies" type="text" name="pregnancies">
+                    </p>
+                    <p>
+                        <label>Glucose</label>
+                        <input id="glucose" type="text" name="glucose">
+                    </p>
+                    <p>
+                        <label>Blood Pressure</label>
+                        <input id="bloodpressure" type="text" name="bloodpressure">
+                    </p>
+                    <p>
+                        <label>Skin Thickness</label>
+                        <input id="skinthickness" type="text" name="skinthickness">
+                    </p>
+                    <p>
+                        <label>Insulin</label>
+                        <input id="insulin" type="text" name="insulin">
+                    </p>
+                    <p>
+                        <label>BMI</label>
+                        <input id="bmi" type="text" name="bmi">
+                    </p>
+                    <p>
+                        <label>Diabetes Pedigree</label>
+                        <input id="diabetespedigree" type="text" name="diabetespedigree">
+                    </p>
+                    <p>
+                        <label>Age</label>
+                        <input id="age" type="text" name="age">
+                    </p>
+                    <p class="block" style="display: none">
+                        <label>Cadena completa</label>
+                        <textarea name="comlete_metrics" rows="3"></textarea>
+                    </p>
+                    <p class="block">
+                        <button type="submit">
+                            Send
+                        </button>
+                    </p>
+                </form>
+            </div>
+            <div class="model-info">
+                <h4>Risk of Diabetes:</h4>
+                <ul class="result">
+                </ul>
+                <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero provident ipsam necessitatibus repellendus?</p> -->
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        (function($) {
+
+            var count = 1
+
+            function getFormData() {
+                // getting the value
+                let pregnancies = $("#pregnancies").val();
+                let glucose = $("#glucose").val();
+                let bloodpressure = $("#bloodpressure").val();
+                let skinthickness = $("#skinthickness").val();
+                let insulin = $("#insulin").val();
+                let bmi = $("#bmi").val();
+                let diabetespedigree = $("#diabetespedigree").val();
+                let age = $("#age").val();
+
+                data = {
+                    "medidas": [pregnancies, glucose, bloodpressure, skinthickness,
+                        insulin, bmi, diabetespedigree, age
+                    ]
+                }
+
+                return data
+            }
+
+            function insertResult(result) {
+                if (result == 1) {
+                    $(".result").append("<li>" + count + ". Yes</li>");
+                } else if (result == 0) {
+                    $(".result").append("<li>" + count + ". No</li>");
+                }
+                count++
+
+            }
+
+            function processForm(e) {
+
+                data_post = getFormData()
+
+                $.ajax({
+                    url: 'http://localhost:5000/predict/',
+                    type: 'post',
+                    data: JSON.stringify(data_post),
+                    contentType: "application/json; charset=utf-8",
+                    success: function(data, textStatus, jQxhr) {
+                        console.log(data);
+                        insertResult(data.result)
+                    },
+                    error: function(jqXhr, textStatus, errorThrown) {
+                        console.log(errorThrown);
+                    }
+                });
+
+                e.preventDefault();
+            }
+
+            $('#my-form').submit(processForm);
+        })(jQuery);
+    </script>
+
+</body>
+
+</html>
