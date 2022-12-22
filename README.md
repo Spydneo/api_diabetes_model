@@ -1,8 +1,6 @@
 Creación y despliegue de un modelo de Inteligencia Artificial: 
 =============================================================
-Nota: En esta rama se ejecuta correctamente la creación de la Imagen de Docker pero no carga desde servidor de Mlflow.
-
-Paquete que sirve para la inferencia de un modelo a través de una API Rest (Fast Api). En este caso se obtiene el modelo de en local. En la rama "feateure_mlflow_new_diabetes" se encuentra la ultima versión que hace uso de mlflow para cargar el modelo. También es posible crear una imagen de Docker haciendo un build del archivo Dockerfile.
+Paquete que sirve para la inferencia de un modelo a través de una API Rest (Fast Api). En este caso se obtiene el modelo de un servidor de MlFlow que sirva para almacenar y versionar los modelos entrenados. También es posible crear una imagen de Docker haciendo un build del archivo Dockerfile.
 
 Para entrenar el modelo podemos ejecutar:
 ```bash
@@ -23,5 +21,7 @@ Para crear la imagen de Docker:
 ```bash
 docker build -t diabetes_api .
 ```
+
+Se puede comentar el apartado de MLFlow y descomentar la carga del modelo en local (pickle) si no se quiere utilizar mlflow.
 
 Autor: Jairo Calderón

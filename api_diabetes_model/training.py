@@ -3,12 +3,12 @@ import os
 from sklearn import svm
 from sklearn import datasets
 import mlflow
+##################### Este archivo entrena un modelo con el Dataset Iris. Revisar Subpaquete model para el modelo Diabetes ###############
 
 # Uso de api de MLFlow con objeto cliente
 mlflow_client = mlflow.client.MlflowClient("http://localhost:5000")
 mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("iris_experiment")
-
 
 def load_dataset():
     iris = datasets.load_iris()
